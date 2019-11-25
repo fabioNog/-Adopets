@@ -4,4 +4,8 @@ import 'antd/dist/antd.css';
 import 'tachyons';
 import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+/*Build my Routes*/
+import Routes from './configs/routes';
+
+
+ReactDOM.render(<Routes />, document.getElementById('root'));

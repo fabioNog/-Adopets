@@ -1,4 +1,4 @@
-import React, {SyntheticEvent} from 'react'
+import React from 'react'
 import { 
   Form, 
   Icon, 
@@ -11,23 +11,13 @@ import './login.css'
 import {FormComponentProps} from 'antd/lib/form/Form';
 
 
-class NormalLoginForm extends React.Component<FormComponentProps> {
-
-  handleSubmit (event: SyntheticEvent ) {
-    event.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-      }
-      console.log(err)
-    });
-  };
-
+class LoginForm extends React.Component<FormComponentProps> {
+  
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <article className=" article mw5 center bg-white shadow-5 br3 pa3 pa4-ns mv3 ba b--black10">
-        <Form onSubmit={this.handleSubmit} className="login-form">
+      <article className=" article mw6 center bg-white shadow-10 br2 pa3 pa4-ns mv3">
+        <Form  className="login-form">
           <Form.Item>
             {getFieldDecorator('username', {
               rules: [{ required: true, message: 'Please input your username!' }],
@@ -60,7 +50,7 @@ class NormalLoginForm extends React.Component<FormComponentProps> {
   }
 }
 
-const Login = Form.create({ name: 'normal_login' })(NormalLoginForm);
+const Login = Form.create({ name: 'normal_login' })(LoginForm);
 
 export default Login
 
