@@ -13,11 +13,20 @@ import {FormComponentProps} from 'antd/lib/form/Form';
 
 class LoginForm extends React.Component<FormComponentProps> {
   
+    handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      this.props.form.validateFields((err, values) => {
+        if (!err) {
+          console.log('Received values of form: ', values);
+        }
+      });
+    };
+
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
       <article className=" article mw6 center bg-white shadow-10 br2 pa3 pa4-ns mv3">
-        <Form  className="login-form">
+        <Form onSubmit={this.handleSubmit} className="login-form">
           <Form.Item>
             {getFieldDecorator('username', {
               rules: [{ required: true, message: 'Please input your username!' }],
