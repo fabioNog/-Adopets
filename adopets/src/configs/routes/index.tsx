@@ -1,10 +1,20 @@
  import React from "react";
  import Provider from 'redux'
- import { BrowserRouter, Route, Switch } from 'react-router-dom'
+ import { BrowserRouter, Route, Switch,Redirect } from 'react-router-dom'
  
 import Login from '../../components/Login'
-import {isAutheticated} from './auth'
-import  PrivateRoute from './privateRoute'
+import {isAuthenticated} from './auth'
+
+
+const PrivateRoute = ({component, isAuthenticated, ...rest}: any) => {
+    const routeComponent = (props: any) => (
+        isAuthenticated
+            ? React.createElement(component, props)
+            : <Redirect to={{pathname: '/login'}}/>
+    );
+    return <Route {...rest} render={routeComponent}/>;
+};
+ 
  function AppRouter() {
    return (
    <BrowserRouter>
