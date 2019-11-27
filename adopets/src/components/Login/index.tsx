@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { 
   Form, 
   Icon, 
@@ -10,9 +10,11 @@ import './login.css'
 
 import {FormComponentProps} from 'antd/lib/form/Form';
 
+import {Store} from '../../store'
+
 
 class LoginForm extends React.Component<FormComponentProps> {
-  
+    
     handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       this.props.form.validateFields((err, values) => {

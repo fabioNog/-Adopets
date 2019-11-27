@@ -1,15 +1,10 @@
  import React , {useState} from "react";
- import Provider from 'redux'
  import { BrowserRouter, Route, Switch,Redirect } from 'react-router-dom'
  
 import Login from '../../components/Login'
-import {isAuthenticated} from './auth'
-
-
-
  
  function AppRouter() {
-   const [auth,setAuth] = useState(true)
+   const [auth,setAuth] = useState(false)
    
    const PrivateRoute = ({component, isAuthenticated, ...rest}: any) => {
       const routeComponent = (props: any) => (

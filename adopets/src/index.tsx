@@ -8,13 +8,12 @@ import App from './App';
 import Routes from './configs/routes';
 
 /*Build my store*/
-import { Provider } from 'react-redux';
-import store from './store';
+import {StoreProvider} from './store'
 
 
 
 ReactDOM.render(
-<Provider store={store}>
+<StoreProvider>
     <Routes />
-</Provider>
+</StoreProvider>    
 , document.getElementById('root'));
