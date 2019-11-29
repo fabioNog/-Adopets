@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, { useState, Component} from 'react'
 import { 
   Form, 
   Icon, 
@@ -10,22 +10,29 @@ import './login.css'
 
 import {FormComponentProps} from 'antd/lib/form/Form';
 
-import {Store} from '../../store'
+interface UserProps{
+  username: string,
+  password: string,
+  isloggin: boolean
+}
 
 
-class LoginForm extends React.Component<FormComponentProps> {
-    
-    handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      this.props.form.validateFields((err, values) => {
-        if (!err) {
-          console.log('Received values of form: ', values);
-        }
-      });
-    };
+class LoginForm extends Component<FormComponentProps,UserProps> {
+  constructor(props: any) {
+    super(props);
+  }
 
+  handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+      }
+    });
+  };
+     
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator } = this.props.form;    
     return (
       <article className=" article mw6 center bg-white shadow-10 br2 pa3 pa4-ns mv3">
         <Form onSubmit={this.handleSubmit} className="login-form">

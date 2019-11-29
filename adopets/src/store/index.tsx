@@ -1,25 +1,19 @@
-import React, {createContext} from 'react';
-import { createStore } from 'redux';
+import {combineReducers, createStore} from 'redux';
 
-interface IState {
-    username: string;
-    password: string;
+interface IState{
+    reducer: []
 }
-
-const initialState:IState = {
-    username: '',
-    password: ''
-}
-
-export const Store = createContext<IState>(initialState)
 
 function reducer(){
-
+    return [
+        {
+            username: 'teste',
+            passwor: 'testando'
+        }        
+    ]
 }
 
-export function StoreProvider(props: any) :JSX.Element{
-    return <Store.Provider value={initialState}>{props.children}</Store.Provider>
-}
-
+const store = createStore(reducer);
+export default store
 
 
