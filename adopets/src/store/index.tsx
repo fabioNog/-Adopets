@@ -1,25 +1,18 @@
-import {combineReducers, createStore} from 'redux';
+import { createStore, applyMiddleware, Store } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import { UsersState } from './ducks/users/types';
 
-export interface APState {
+import rootReducer from './ducks/rootReducer';
+import rootSaga from './ducks/rootSaga';
+
+export interface ApplicationState {
   users: UsersState
 }
 
-interface IState{
-    reducer: []
-}
+const sagaMiddleware = createSagaMiddleware();
 
-function reducer(){
-    return [
-        {
-            username: 'teste',
-            password: 'testando'
-        }        
-    ]
-}
+const store: Store<ApplicationState> = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 
-const store = createStore(reducer);
+sagaMiddleware.run(rootSaga);
 
-export default store
-
-
+export default store;

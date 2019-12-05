@@ -10,7 +10,7 @@ import './login.css'
 
 import {FormComponentProps} from 'antd/lib/form/Form';
 
-import  {APState}  from '../../store';
+import  {ApplicationState}  from '../../store';
 
 import {connect} from 'react-redux'
 
@@ -36,7 +36,7 @@ class LoginForm extends Component<FormComponentProps,UserProps> {
   };
      
   render() {
-   console.log(this.props)
+    
     const { getFieldDecorator } = this.props.form;    
     return (
       <article className=" article mw6 center bg-white shadow-10 br2 pa3 pa4-ns mv3">
@@ -75,7 +75,7 @@ class LoginForm extends Component<FormComponentProps,UserProps> {
 
 const Login = Form.create({ name: 'normal_login' })(LoginForm);
 
-const mapStateToProps = (state: APState ) => ({
+const mapStateToProps = (state: ApplicationState ) => ({
     users: state.users
     
 });
