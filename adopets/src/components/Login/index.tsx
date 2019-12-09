@@ -13,22 +13,31 @@ import {FormComponentProps} from 'antd/lib/form/Form';
 //Store
 import  {ApplicationState}  from '../../store';
 import { user } from '../../store/ducks/users/types';
+import * as UsersActions from '../../store/ducks/users/action';
 
 //Redux
 import {connect} from 'react-redux'
+import { bindActionCreators, Dispatch } from 'redux';
 
 interface StateProps {
   users: user[]
 }
 
+interface DispatchProps {
+  loadRequest(): void
+}
 
 
-type Props = StateProps
+type Props = StateProps & FormComponentProps & DispatchProps
 
 
 
-class LoginForm extends Component<FormComponentProps,Props> {
+class LoginForm extends Component<Props> {
+  componentDidMount() {
+    const { loadRequest } = this.props;
 
+    loadRequest();
+  }
 
   handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,7 +49,8 @@ class LoginForm extends Component<FormComponentProps,Props> {
   };
      
   render() {
-    
+    const {users} = this.props
+    {console.log(users)}
     const { getFieldDecorator } = this.props.form;    
     return (
       <article className=" article mw6 center bg-white shadow-10 br2 pa3 pa4-ns mv3">
@@ -82,5 +92,7 @@ const Login = Form.create({ name: 'normal_login' })(LoginForm);
 const mapStateToProps = (state: ApplicationState ) => ({
     users: state.users.data    
 });
-export default connect(mapStateToProps)(Login)
+
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(UsersActions, dispatch);
+export default connect(mapStateToProps,mapDispatchToProps)(Login)
 
