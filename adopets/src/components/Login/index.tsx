@@ -10,21 +10,25 @@ import './login.css'
 
 import {FormComponentProps} from 'antd/lib/form/Form';
 
+//Store
 import  {ApplicationState}  from '../../store';
+import { user } from '../../store/ducks/users/types';
 
+//Redux
 import {connect} from 'react-redux'
 
-interface UserProps{
-  username: string,
-  password: string,
-  isloggin: boolean
+interface StateProps {
+  users: user[]
 }
 
 
-class LoginForm extends Component<FormComponentProps,UserProps> {
-  constructor(props: any) {
-    super(props);
-  }
+
+type Props = StateProps
+
+
+
+class LoginForm extends Component<FormComponentProps,Props> {
+
 
   handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -76,8 +80,7 @@ class LoginForm extends Component<FormComponentProps,UserProps> {
 const Login = Form.create({ name: 'normal_login' })(LoginForm);
 
 const mapStateToProps = (state: ApplicationState ) => ({
-    users: state.users
-    
+    users: state.users.data    
 });
 export default connect(mapStateToProps)(Login)
 
